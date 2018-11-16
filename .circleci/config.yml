@@ -35,11 +35,10 @@ jobs:
 #          - v1-dep-{{ .Environment.ANSIBLE_VERSION }}
 #          # fallback to using the latest cache if no exact match is found
 #          - v1-dep-
+      - run: go get github.com/tools/godep
       - run:
           name: build packages
           command: |
-            go get -u github.com/tools/godep
-            sleep 10
             git clone https://github.com/cloudflare/cfssl
             cd cfssl
             dep ensure
