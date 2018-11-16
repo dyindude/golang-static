@@ -38,6 +38,7 @@ jobs:
       - run:
           name: build packages
           command: |
+            go get github.com/tools/godep
             git clone https://github.com/cloudflare/cfssl
             cd cfssl
             dep ensure
