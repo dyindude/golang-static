@@ -39,6 +39,7 @@ jobs:
       - run:
           name: build packages
           command: |
+            cd $GOPATH/src
             git clone https://github.com/cloudflare/cfssl
             cd cfssl
             dep ensure
