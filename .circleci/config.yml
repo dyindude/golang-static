@@ -35,6 +35,7 @@ jobs:
 #          - v1-dep-{{ .Environment.ANSIBLE_VERSION }}
 #          # fallback to using the latest cache if no exact match is found
 #          - v1-dep-
+      - run: apt-get -y install libsqlite3-dev
       - run:
           name: build packages
           command: |
