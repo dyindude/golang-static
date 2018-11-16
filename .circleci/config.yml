@@ -41,7 +41,9 @@ jobs:
             cd $GOPATH/src
             git clone https://github.com/cloudflare/cfssl
             cd cfssl
-            go get -d -v ./...
+            go env GOOS
+            go env GOARCH
+            GOOS=$(go env GOOS) GOARCH=$(go env GOARCH) go get -d -v ./...
             CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -o bin/cfssl ./cmd/cfssl
             CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -o bin/cfssljson ./cmd/cfssljson
 
