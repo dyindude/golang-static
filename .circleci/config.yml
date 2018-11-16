@@ -35,14 +35,13 @@ jobs:
 #          - v1-dep-{{ .Environment.ANSIBLE_VERSION }}
 #          # fallback to using the latest cache if no exact match is found
 #          - v1-dep-
-      - run: go get -u github.com/golang/dep/cmd/dep
       - run:
           name: build packages
           command: |
             cd $GOPATH/src
             git clone https://github.com/cloudflare/cfssl
             cd cfssl
-            dep ensure
+            go get -d -v ./...
             CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -o bin/cfssl ./cmd/cfssl
             CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -o bin/cfssljson ./cmd/cfssljson
 
