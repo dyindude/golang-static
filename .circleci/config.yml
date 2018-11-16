@@ -40,8 +40,8 @@ jobs:
           command: |
             git clone https://github.com/cloudflare/cfssl
             cd cfssl
-            CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -o bin/cfssl ./cmd/cfssl.go
-            CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -o bin/cfssljson ./cmd/cfssljson.go
+            CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -o bin/cfssl ./cmd/cfssl
+            CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -o bin/cfssljson ./cmd/cfssljson
 
 #      - save_cache:
 #          paths:
