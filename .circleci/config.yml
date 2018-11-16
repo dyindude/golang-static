@@ -42,8 +42,8 @@ jobs:
             git clone https://github.com/cloudflare/cfssl $GOPATH/src/github.com/cloudflare/cfssl
             cd $GOPATH/src/github.com/cloudflare/cfssl
             go get github.com/cloudflare/cfssl_trust/...
-            CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -o bin/cfssl ./cmd/cfssl
-            CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -o bin/cfssljson ./cmd/cfssljson
+            CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -ldflags '-extldflags "-static"' -o bin/cfssl ./cmd/cfssl
+            CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -ldflags '-extldflags "-static"' -o bin/cfssljson ./cmd/cfssljson
 
 #      - save_cache:
 #          paths:
