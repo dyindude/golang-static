@@ -49,7 +49,7 @@ jobs:
 #            - ./ansible.cfg
 #          key: v1-dep-{{ .Environment.ANSIBLE_VERSION }}
       - store_artifacts:
-        path: ~/golang-static/cfssl/bin/cfssl
+          path: ~/golang-static/cfssl/bin/cfssl
       - store_artifacts:
-        path: ~/golang-static/cfssl/bin/cfssljson
+          path: ~/golang-static/cfssl/bin/cfssljson
 
