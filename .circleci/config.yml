@@ -54,7 +54,7 @@ jobs:
 #            - ./ansible.cfg
 #          key: v1-dep-{{ .Environment.ANSIBLE_VERSION }}
       - store_artifacts:
-          path: $GOPATH/src/github.com/cloudflare/cfssl/bin/cfssl
+          path: /go/src/github.com/cloudflare/cfssl/bin/cfssl
       - store_artifacts:
-          path: $GOPATH/src/github.com/cloudflare/cfssl/bin/cfssljson
+          path: /go/src/github.com/cloudflare/cfssl/bin/cfssljson
 
