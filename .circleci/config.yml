@@ -1,0 +1,55 @@
+# Python CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-python/ for more details
+#
+version: 2
+jobs:
+  build:
+    docker:
+      # specify the version you desire here
+      # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
+      - image: golang:1.11
+      
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/postgres:9.4
+
+      working_directory: ~/golang-static
+
+    steps:
+      - checkout
+
+      #circleci dependencies need to be installed before any circleci specific commands (e.g. restore_cache)
+      #https://github.com/circleci/circleci-docs/issues/1740
+      #https://circleci.com/docs/2.0/custom-images/#adding-required-and-custom-tools-or-files
+      - run:
+          name: install circleci dependencies
+          command: |
+            apt-get update
+            apt-get -y install git ssh tar gzip ca-certificates
+
+#      # Download and cache dependencies
+#      - restore_cache:
+#          keys:
+#          - v1-dep-{{ .Environment.ANSIBLE_VERSION }}
+#          # fallback to using the latest cache if no exact match is found
+#          - v1-dep-
+      - run:
+          name: build packages
+          command: |
+            git clone https://github.com/cloudflare/cfssl
+            cd cfssl
+            CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -o bin/cfssl ./cmd/cfssl.go
+            CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -o bin/cfssljson ./cmd/cfssljson.go
+
+#      - save_cache:
+#          paths:
+#            - ./~venv
+#            - ./ansible.cfg
+#          key: v1-dep-{{ .Environment.ANSIBLE_VERSION }}
+      - store_artifacts:
+        path: ~/golang-static/cfssl/bin/cfssl
+      - store_artifacts:
+        path: ~/golang-static/cfssl/bin/cfssljson
+
